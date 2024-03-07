@@ -1,16 +1,18 @@
 "use client";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { MdDelete } from "react-icons/md";
 
 const SavedFacts = () => {
-  const [savedFacts, setSavedFacts] = useState(
-    JSON.parse(window?.localStorage?.getItem("savedFacts")) || []
-  );
+  const [savedFacts, setSavedFacts] = useState([]);
 
   const [id, setId] = useState(null);
   useEffect(() => {
     const id = window?.localStorage?.getItem("session_id");
     setId(id);
+
+    if(typeof window !== "undefined"){
+      setSavedFacts(JSON.parse(window?.localStorage?.getItem("savedFacts")))
+    }
   }, []);
 
   const handleDelete = (index) => {
@@ -38,7 +40,7 @@ const SavedFacts = () => {
               <p className="no-fact">No fact found to display!</p>
             )}
 
-            {savedFacts.map((item, index) => (
+            {savedFacts?.map((item, index) => (
               <div className="fact" key={index}>
                 <span>{item.text}</span>
                 <span
