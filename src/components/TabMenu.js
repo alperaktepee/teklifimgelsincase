@@ -3,7 +3,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 const TabMenu = ({ selectedItem }) => {
-  const id = localStorage.getItem("session_id");
+  const [id, setId] = useState(null);
+
+  useEffect(() => {
+    const id = window?.localStorage?.getItem("session_id");
+    setId(id);
+  }, []);
 
   const [activeTab, setActiveTab] = useState("random");
   const [fact, setFact] = useState("");
@@ -34,7 +39,7 @@ const TabMenu = ({ selectedItem }) => {
     let savedFacts = [];
 
     // Get existing saved facts from localStorage
-    const savedFactsString = localStorage.getItem("savedFacts");
+    const savedFactsString = window?.localStorage?.getItem("savedFacts");
     if (savedFactsString) {
       savedFacts = JSON.parse(savedFactsString);
     }
@@ -47,7 +52,7 @@ const TabMenu = ({ selectedItem }) => {
     }
 
     // Save the updated array back to localStorage
-    localStorage.setItem("savedFacts", JSON.stringify(savedFacts));
+    window?.localStorage?.setItem("savedFacts", JSON.stringify(savedFacts));
 
     toast.success("Fact saved successfully!");
   };
@@ -101,16 +106,15 @@ const TabMenu = ({ selectedItem }) => {
             Fact of the Day
           </button>
         </div>
-   
-          <div className="tabContent">
-            {activeTab === "random" && <div>{fact}</div>}
-            {activeTab === "today" && (
-              <div>
-                <p>{factToday}</p>
-              </div>
-            )}
-          </div>
-    
+
+        <div className="tabContent">
+          {activeTab === "random" && <div>{fact}</div>}
+          {activeTab === "today" && (
+            <div>
+              <p>{factToday}</p>
+            </div>
+          )}
+        </div>
 
         <div className="button-container-tab">
           {activeTab === "random" && (

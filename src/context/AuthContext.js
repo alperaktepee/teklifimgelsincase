@@ -13,9 +13,9 @@ export const AuthProvider = ({ children }) => {
     try {
       await axios.get("/api/users/logout");
       setData("");
-      localStorage.removeItem("session_id");
+      window?.localStorage?.removeItem("session_id");
       toast.success("Log out successfully");
-      window.location.reload()
+      window?.location.reload()
     } catch (error) {}
   };
 

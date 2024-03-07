@@ -24,7 +24,7 @@ export default function SignIn() {
       const res = await axios.get("/api/users/me");
       console.log(res.data);
       setData(res.data.data._id);
-      localStorage.setItem("session_id", res.data.data._id);
+      window?.localStorage?.setItem("session_id", res.data.data._id);
       router.push("/");
     } catch (error) {
       toast.error("Login failed");
