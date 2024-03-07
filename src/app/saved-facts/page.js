@@ -10,8 +10,8 @@ const SavedFacts = () => {
     const id = window?.localStorage?.getItem("session_id");
     setId(id);
 
-    if(typeof window !== "undefined"){
-      setSavedFacts(JSON.parse(window?.localStorage?.getItem("savedFacts")))
+    if (typeof window !== "undefined") {
+      setSavedFacts(JSON.parse(window?.localStorage?.getItem("savedFacts")));
     }
   }, []);
 
@@ -28,33 +28,37 @@ const SavedFacts = () => {
   };
 
   return (
-    <div className="container-facts">
-      <div className="message">
-        {!id ? (
-          <p className="no-fact">
-            You need to authorize to view the saved facts!
-          </p>
-        ) : (
-          <div className="facts">
-            {savedFacts.length === 0 && (
-              <p className="no-fact">No fact found to display!</p>
-            )}
+    <>
+      <h1 className="saved-facts-title">Saved Facts</h1>
 
-            {savedFacts?.map((item, index) => (
-              <div className="fact" key={index}>
-                <span>{item.text}</span>
-                <span
-                  className="fact-delete"
-                  onClick={() => handleDelete(index)}
-                >
-                  <MdDelete size={25} />
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
+      <div className="container-facts">
+        <div className="message">
+          {!id ? (
+            <p className="no-fact">
+              You need to authorize to view the saved facts!
+            </p>
+          ) : (
+            <div className="facts">
+              {savedFacts.length === 0 && (
+                <p className="no-fact">No fact found to display!</p>
+              )}
+
+              {savedFacts?.map((item, index) => (
+                <div className="fact" key={index}>
+                  <span>{item.text}</span>
+                  <span
+                    className="fact-delete"
+                    onClick={() => handleDelete(index)}
+                  >
+                    <MdDelete size={25} />
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
