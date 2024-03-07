@@ -13,12 +13,15 @@ export const AuthProvider = ({ children }) => {
     try {
       await axios.get("/api/users/logout");
       setData("");
-      window?.localStorage?.removeItem("session_id");
+      if (typeof window !== "undefined") {
+        window?.localStorage?.removeItem("session_id");
+      }
       toast.success("Log out successfully");
-      window?.location.reload()
+      if (typeof window !== "undefined") {
+        window?.location.reload();
+      }
     } catch (error) {}
   };
-
 
   return (
     <AuthContext.Provider value={{ data, logout, setData }}>

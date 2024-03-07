@@ -13,7 +13,7 @@ const TabMenu = ({ selectedItem }) => {
   const [activeTab, setActiveTab] = useState("random");
   const [fact, setFact] = useState("");
   const [factToday, setFactToday] = useState("");
-
+  const [savedFactsString, setSavedFactsString] = useState(null);
   const handleTabChange = (tab) => {
     setActiveTab(tab);
     {
@@ -40,6 +40,7 @@ const TabMenu = ({ selectedItem }) => {
 
     // Get existing saved facts from localStorage
     const savedFactsString = window?.localStorage?.getItem("savedFacts");
+    setSavedFactsString(savedFactsString);
     if (savedFactsString) {
       savedFacts = JSON.parse(savedFactsString);
     }
@@ -52,7 +53,9 @@ const TabMenu = ({ selectedItem }) => {
     }
 
     // Save the updated array back to localStorage
-    window?.localStorage?.setItem("savedFacts", JSON.stringify(savedFacts));
+    if (typeof window !== "undefined") {
+      window?.localStorage?.setItem("savedFacts", JSON.stringify(savedFacts));
+    }
 
     toast.success("Fact saved successfully!");
   };

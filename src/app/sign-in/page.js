@@ -24,20 +24,27 @@ export default function SignIn() {
       const res = await axios.get("/api/users/me");
       console.log(res.data);
       setData(res.data.data._id);
-      window?.localStorage?.setItem("session_id", res.data.data._id);
-      router.push("/");
+      if (typeof window !== "undefined") {
+        window?.localStorage?.setItem("session_id", res.data.data._id);
+      }
     } catch (error) {
       toast.error("Login failed");
       console.log(error);
     } finally {
       setLoading(false);
+      if (typeof window !== "undefined") {
+        window.location.href = "/";
+      }
     }
   };
 
   return (
     <>
       {loading ? (
-      <div className="spinner-container"> <Loading /></div> 
+        <div className="spinner-container">
+          {" "}
+          <Loading />
+        </div>
       ) : (
         <div className="container">
           <h1>Sign In</h1>
