@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/context/AuthContext";
 const inter = Inter({ subsets: ["latin"] });
 import "@/styles/globals.scss";
+import Head from 'next/head';
 
 export const metadata = {
   title: "TeklifimGelsin Assignment",
@@ -14,13 +15,13 @@ export default function RootLayout({ children }) {
   return (
     <AuthProvider>
       <html lang="en">
-    <head>
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <Head>
+    <script   dangerouslySetInnerHTML={{__html:`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NQ6HJXNP');</script>
-    </head>
+})(window,document,'script','dataLayer','GTM-NQ6HJXNP');`}}/>
+    </Head>
       <body className={inter.className}>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NQ6HJXNP"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
