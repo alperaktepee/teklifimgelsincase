@@ -25,7 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NQ6HJXNP"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <Toaster position="top-center" />
-          <nav>
+              <nav>
             <Navbar />
           </nav>
           {children}
